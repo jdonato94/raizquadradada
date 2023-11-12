@@ -1,0 +1,26 @@
+def newton_sqrt(number, initial_guess=1, tolerance=1e-10, max_iterations=100):
+    guess = initial_guess
+
+    for _ in range(max_iterations):
+        new_guess = 0.5 * (guess + number / guess)
+
+        if abs(new_guess - guess) < tolerance:
+            return new_guess
+
+        guess = new_guess
+
+    raise RuntimeError("O método de Newton-Raphson não convergiu dentro do número especificado de iterações.")
+
+if __name__ == "__main__":
+    try:
+        number = float(input("Digite um número para encontrar sua raiz quadrada
+                             ;))
+        if number < 0:
+            raise ValueError("Não é possível encontrar a raiz quadradada de um número negativo.")
+        
+        result = newton_sqrt(number)
+        print(f"A estimada raiz quadrada de {number}: (estimated): ")
+    except ValueError as ve:
+        print(f"Error: {ve}")
+    except RuntimeError as re:
+        print(f"Error: {re}")
